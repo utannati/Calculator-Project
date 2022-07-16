@@ -56,8 +56,9 @@ function Handle_Operator(Next_operator) {
 //if operator exists, property lookup is performed for the operator
 //in the perform_Calculator object and the function that matches the 
 // operator is executed 
-let result = perform_Calcuation[operator] (Value_Now, Value_of_Input);
+let result = Preforrm_Calculation[operator] (Value_Now, Value_of_Input);
 //here we add a fixed amount of numbers after the decimal
+result = Number(result).toFixed(9)
 result = (result * 1).toString()
 Calculator.Display_Value = parseFloat(result);
 Calculator.First_Operand = parseFloat(result);
@@ -66,7 +67,7 @@ Calculator.Wait_Second_Operand = true;
 Calculator.operator = Next_operator
 }
 
-const perform_Calcuator = {
+const Preforrm_Calculation = {
     '/': (First_Operand, Second_Operand) => First_Operand / Second_Operand,
     '*': (First_Operand, Second_Operand) => First_Operand * Second_Operand,
     '+': (First_Operand, Second_Operand) => First_Operand + Second_Operand,
@@ -88,7 +89,7 @@ function Update_Display() {
  
 Update_Display();
 //this section monitors button clicks 
-const keys = document.querySelector(".calculator-key");
+const keys = document.querySelector(".calculator-keys");
 keys.addEventListener('click', (event) => {
     // the targervariable is an object that represent the element
     // that was clicked
@@ -109,7 +110,7 @@ keys.addEventListener('click', (event) => {
         return;
     }
     //ensures that AC clears the numbers from the Calculator
-    if (target.classList.contains('decimal')) {
+    if (target.classList.contains('all-clear')) {
         Calculator_Reset();
         Update_Display();
         return;
@@ -118,5 +119,3 @@ keys.addEventListener('click', (event) => {
     Input_Digit(target.value);
     Update_Display();
 })
-
-
